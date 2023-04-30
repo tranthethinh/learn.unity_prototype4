@@ -7,6 +7,8 @@ TagManager:
   - Powerup
   - Enemy
   - S_enemy
+  - PowerupGun
+  - PowerupJump
   layers:
   - Default
   - TransparentFX

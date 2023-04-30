@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
+        enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length+ GameObject.FindGameObjectsWithTag("S_enemy").Length;
 
         if (enemyCount == 0)
         {

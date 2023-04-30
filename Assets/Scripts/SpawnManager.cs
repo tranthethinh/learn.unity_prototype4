@@ -5,17 +5,19 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     public GameObject enemyPrefab;
+    public GameObject bossPrefab;
     public GameObject S_enemyPrefab;
     private float spawnRang = 9;
     public int enemyCount;
     public int waveNumber=1;
-    public GameObject powerupPrefab;
+    public GameObject[] powerupPrefab;
+
 
     // Start is called before the first frame update
     void Start()
     {
         SpawnEnemyWave(waveNumber);
-        Instantiate(powerupPrefab, GenerateSpawnPosition(), powerupPrefab.transform.rotation);
+        Instantiate(powerupPrefab[RandomIndex()], GenerateSpawnPosition(), powerupPrefab[RandomIndex()].transform.rotation);
 
     }
 
@@ -27,7 +29,11 @@ public class SpawnManager : MonoBehaviour
         {
             waveNumber++;
             SpawnEnemyWave(waveNumber);
-            Instantiate(powerupPrefab, GenerateSpawnPosition(), powerupPrefab.transform.rotation);
+            Instantiate(powerupPrefab[RandomIndex()], GenerateSpawnPosition(), powerupPrefab[RandomIndex()].transform.rotation);
+            if (waveNumber % 5 == 0)
+            {
+                Instantiate(bossPrefab, GenerateSpawnPosition(), enemyPrefab.transform.rotation);
+            }
         }
         
     }
@@ -46,5 +52,9 @@ public class SpawnManager : MonoBehaviour
         {
             Instantiate(enemyPrefab, GenerateSpawnPosition(), enemyPrefab.transform.rotation);
         }
+    }
+    private int RandomIndex()
+    {
+        return Random.Range(0, powerupPrefab.Length);
     }
 }
